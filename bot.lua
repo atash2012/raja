@@ -496,7 +496,7 @@ function tdcli_update_callback(data)
 					local offlink = redis:get("botBOT-IDofflink") and "⛔️" or "✅️"
 					local nlink = redis:get("botBOT-IDlink") and "✅️" or "⛔️"
 					local contacts = redis:get("botBOT-IDsavecontacts") and "✅️" or "⛔️"
-					local txt = "⚙️  <i>وضعیت اجرایی تبلیغ‌گر</i><code> BOT-ID</code>  ⛓\n"..tostring(offjoin).."<code> عضویت خودکار </code>🚀\n"..tostring(offlink).." تایید لینک خودکار 🚦\n"..tostring(nlink).."<code>تشخیص لینک های عضویت </code>🎯\n"..tostring(contacts).."افزودن خودکار مخاطبین ➕\n" .. tostring(autoanswer) .."<code>حالت پاسخگویی خودکار 🗣 </code>\n" .. tostring(numadd) .. "افزودن مخاطب با شماره 📞 \n" .. tostring(msgadd) .. "<code>افزودن مخاطب با پیام 🗞</code>\n   ⬛️🔲▪️🔘▪️🔲⬛️\n📄<code> پیام افزودن مخاطب :</code>\n📍 " .. tostring(txtadd) .. " 📍\n   ⬛️🔲▪️🔘▪️🔲⬛️\n<code>📁 لینک های ذخیره شده : </code><b>" .. tostring(links) .. "</b>\n⏲	لینک های در انتظار عضویت : <b>" .. tostring(glinks) .. "</b>\n🕖   <b>" .. tostring(s) .. " </b><code>ثانیه تا عضویت مجدد</code>\n❄️ لینک های در انتظار تایید : <b>" .. tostring(wlinks) .. "</b>\n🕑️   <b>" .. tostring(ss) .. " </b><code>ثانیه تا تایید لینک مجدد</code>"
+					local txt = "<i>⛓💱🔹 وضعیت اجرایی  رجا🔹💱⛓</i><code> BOT-ID</code> \n    🔺🔻🔺🔻🔺🔻\n"..tostring(offjoin).."<code> عضویت خودکار </code>🚀\n"..tostring(offlink).." تایید لینک خودکار 🚦\n"..tostring(nlink).."<code>تشخیص لینک های عضویت </code>🎯\n"..tostring(contacts).."افزودن خودکار مخاطبین ➕\n" .. tostring(autoanswer) .."<code>حالت پاسخگویی خودکار 🗣 </code>\n" .. tostring(numadd) .. "افزودن مخاطب با شماره 📞 \n" .. tostring(msgadd) .. "<code>افزودن مخاطب با پیام 🗞</code>\n   ⬛️🔲▪️🔘▪️🔲⬛️\n📄<code> پیام افزودن مخاطب :</code>\n📍 " .. tostring(txtadd) .. " 📍\n   ⬛️🔲▪️🔘▪️🔲⬛️\n<code>📁 لینک های ذخیره شده : </code><b>" .. tostring(links) .. "</b>\n⏲	لینک های در انتظار عضویت : <b>" .. tostring(glinks) .. "</b>\n🕖   <b>" .. tostring(s) .. " </b><code>ثانیه تا عضویت مجدد</code>\n❄️ لینک های در انتظار تایید : <b>" .. tostring(wlinks) .. "</b>\n🕑️   <b>" .. tostring(ss) .. " </b><code>ثانیه تا تایید لینک مجدد</code>"
 					return send(msg.chat_id_, 0, txt)
 				elseif text:match("^(امار)$") or text:match("^(آمار)$") or text:match("^(raja)$") or text:match("^(1)$")then
 					local gps = redis:scard("botBOT-IDgroups")
@@ -514,8 +514,8 @@ function tdcli_update_callback(data)
 					end, nil)
 					local contacts = redis:get("botBOT-IDcontacts")
 					local text = [[<i>🖥  وضعیت___🖋  امار ✍ </i>
-  🔆🔅🔷 ربات من  🔷🔅🔆 <code> BOT-ID</code>
-
+  💱⛓🔹 ربات  رجا🔹⛓💱
+  <code> BOT-ID</code>
 👤 چت های شخصی  :  
 🆗➡️🚥  <b>]] .. tostring(usrs) .. [[</b><code> user </code>
 🎎 گروههای معمولی : 
@@ -554,8 +554,8 @@ function tdcli_update_callback(data)
 						}, dl_cb, nil)
 					end
 					return send(msg.chat_id_, msg.id_, "<i>با موفقیت فرستاده شد</i>")
-				elseif text:match("^(ارسال به سوپرگروه) (.*)") then
-					local matches = text:match("^ارسال به سوپرگروه (.*)")
+				elseif text:match("^(ارسال به سوپرگروه) (.*)") or text:match("^(بفرس) (.*)") then
+					local matches = text:match("^ارسال به سوپرگروه (.*)") 
 					local dir = redis:smembers("botBOT-IDsupergroups")
 					for i, v in pairs(dir) do
 						tdcli_function ({
