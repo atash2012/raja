@@ -514,7 +514,7 @@ function tdcli_update_callback(data)
 					end, nil)
 					local contacts = redis:get("botBOT-IDcontacts")
 					local text = [[<i>🖥  وضعیت___🖋  امار ✍ </i>
-  🔆🔅🔷 ربات من  🔷🔅🔆 
+  🔆🔅🔷 ربات من  🔷🔅🔆 <code> BOT-ID</code>
 
 👤 چت های شخصی  :  
 🆗➡️🚥  <b>]] .. tostring(usrs) .. [[</b><code> user </code>
@@ -648,7 +648,7 @@ function tdcli_update_callback(data)
 						end	
 					end
 					return send(msg.chat_id_, msg.id_, "<i>کاربر مورد نظر به تمام گروه های من دعوت شد</i>")
-					elseif text:match("addallmybots") then
+					elseif text:match("^(addallmybots)$") then
                                         local list = {redis:smembers("botBOT-IDgroups"),redis:smembers("botBOT-IDsupergroups")}
                                         local mybots = redis:smembers("botBOT-IDmybots")
                                         local mybotscount = redis:scard("botBOT-IDmybots")
@@ -681,7 +681,7 @@ function tdcli_update_callback(data)
                                           else
                                             return send (msg.chat_id_, msg.id_, "<code>✔️ این ای دی تو لیست نبود ⁉️⁉️ </code>\n")
                                           end
-                                        elseif text:match("لیست") or text:match("list") or text:match("ای دی") then
+                                        elseif text:match("^(لیست)$") or text:match("^(list)$") or text:match("^(ای دی)$")or text:match("^(11)$") then
                                           local mybots = redis:smembers ("botBOT-IDmybots") 
                                           local tt = "اد لیست گروهی ربات \n  \n 🔲 addallmybots \n  🔳 اد شدن ای دی های زیر به سوپر گروههای ربات  \n 🔲 addmybot 🆔(ID) \n 🔳 اضافه کردن ای دی به این لیست \n 🔲 delmybot 🆔(ID) \n 🔳 حذف ای دی از این لیست \n \n 🅰➿➿➿➿➿ \n 349469421 \n 🅰➿➿➿➿➿"
                                           for i, v in pairs(mybots) do
