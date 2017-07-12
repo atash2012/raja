@@ -505,6 +505,7 @@ function tdcli_update_callback(data)
 					local links = redis:scard("botBOT-IDsavedlinks")
 					local glinks = redis:scard("botBOT-IDgoodlinks")
 					local wlinks = redis:scard("botBOT-IDwaitelinks")
+					local fname = redis:get("botBOT-IDfname")
 					tdcli_function({
 						ID = "SearchContacts",
 						query_ = nil,
@@ -513,9 +514,9 @@ function tdcli_update_callback(data)
 					redis:set("botBOT-IDcontacts", naji.total_count_)
 					end, nil)
 					local contacts = redis:get("botBOT-IDcontacts")
-					local text = [[<i>🖥  وضعیت___🖋  امار ✍ </i>
- 💱⛓🔹 ربات  رجا🔹⛓💱 <code> BOT-ID</code>
-  botBOT-IDfname BOT-IDfname
+					local text = [[ 💱⛓🔹 ربات  رجا🔹⛓💱 <code> BOT-ID</code> 
+<i>🖥  وضعیت و امار ✍ </i>⚡️⚡️ ]] .. tostring(fname) .. [[
+					
 👤 چت های شخصی  :  
 🆗➡️🚥  <b>]] .. tostring(usrs) .. [[</b><code> user </code>
 🎎 گروههای معمولی : 
