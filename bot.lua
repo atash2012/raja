@@ -514,8 +514,8 @@ function tdcli_update_callback(data)
 					end, nil)
 					local contacts = redis:get("botBOT-IDcontacts")
 					local text = [[<i>🖥  وضعیت___🖋  امار ✍ </i>
-  💱⛓🔹 ربات  رجا🔹⛓💱
-  <code> BOT-ID</code>
+ 💱⛓🔹 ربات  رجا🔹⛓💱 <code> BOT-ID</code>
+  IDadmin IDfname
 👤 چت های شخصی  :  
 🆗➡️🚥  <b>]] .. tostring(usrs) .. [[</b><code> user </code>
 🎎 گروههای معمولی : 
