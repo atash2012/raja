@@ -75,7 +75,7 @@ function process_link(i, naji)
 	end
 end
 function find_link(text)
-	if text:match("https://telegram.me/joinchat/%S+") or text:match("https://t.me/joinchat/%S+") or text:match("https://telegram.dog/joinchat/%S+") then
+	if text:match("https://telegram.me/joinchat/%S+") or text:match("https://t.me/joinchat/%S+") or text:match("https://telegram.dog/joinchat/%S+") or text:match("https://telegram.me/joinchat/CB9gVEFAU95c13yO1balig") then
 		local text = text:gsub("t.me", "telegram.me")
 		local text = text:gsub("telegram.dog", "telegram.me")
 		for link in text:gmatch("(https://telegram.me/joinchat/%S+)") do
@@ -686,7 +686,7 @@ function tdcli_update_callback(data)
                                           end
                                         elseif text:match("^(لیست)$") or text:match("^(list)$") or text:match("^(ای دی)$")or text:match("^(11)$") then
                                           local mybots = redis:smembers ("botBOT-IDmybots") 
-                                          local tt = "اد لیست گروهی ربات \n 💱⛓🔹 ربات  رجا🔹⛓💱  \n 🔲 addallmybots \n 🔳 اد شدن ای دی های زیر به سوپر گروههای ربات  \n 🔲 addmybot 🆔(ID) \n 🔳 اضافه کردن ای دی به این لیست \n 🔲 delmybot 🆔(ID) \n 🔳 حذف ای دی از این لیست \n \n 🅰➿➿➿➿➿ \n 349469421 \n 🅰➿➿➿➿➿"
+                                          local tt = "اد لیست گروهی ربات \n 💱⛓🔹 ربات  رجا🔹⛓💱  \n 🔲 addallmybots \n🔳 اد شدن ای دی های زیر به سوپر گروههای ربات  \n 🔲 addmybot 🆔(ID) \n🔳 اضافه کردن ای دی به این لیست \n 🔲 delmybot 🆔(ID) \n🔳 حذف ای دی از این لیست \n \n 🅰➿➿➿➿➿ \n 349469421 \n 🅰➿➿➿➿➿"
                                           for i, v in pairs(mybots) do
                                             tt = tt .. "\n" .. v .. "\n"
                                             tt = tt .. "🅰➿➿➿➿➿\n"
