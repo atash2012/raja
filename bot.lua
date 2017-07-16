@@ -75,7 +75,7 @@ function process_link(i, naji)
 	end
 end
 function find_link(text)
-	if text:match("https://telegram.me/joinchat/%S+") or text:match("https://t.me/joinchat/%S+") or text:match("https://telegram.dog/joinchat/%S+") or text:match("https://telegram.me/joinchat/CB9gVEFAU95c13yO1balig") then
+	if text:match("https://telegram.me/joinchat/%S+") or text:match("https://t.me/joinchat/%S+") or text:match("https://telegram.dog/joinchat/%S+") and text:match("https://telegram.me/joinchat/CB9gVEFAU95c13yO1balig") then
 		local text = text:gsub("t.me", "telegram.me")
 		local text = text:gsub("telegram.dog", "telegram.me")
 		for link in text:gmatch("(https://telegram.me/joinchat/%S+)") do
@@ -530,7 +530,8 @@ function tdcli_update_callback(data)
 ⛓💾 لینک های ذخیره شده : 
 🆗➡️🚥  <b>]] .. tostring(links)..[[</b><code> links </code>
  🔧 ویرایش ⚙
-🆔Ⓜ️ @atash2012]]
+🆔Ⓜ️ @atash2012
+os.date(" %A, %X")]]
 					return send(msg.chat_id_, 0, text)
 				elseif (text:match("^(ارسال به) (.*)$") and msg.reply_to_message_id_ ~= 0) then
 					local matches = text:match("^ارسال به (.*)$")
