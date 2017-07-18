@@ -507,6 +507,7 @@ function tdcli_update_callback(data)
 					local glinks = redis:scard("botBOT-IDgoodlinks")
 					local wlinks = redis:scard("botBOT-IDwaitelinks")
 					local fname = redis:get("botBOT-IDfname")
+					local sima = os.date("%A🔜 %d %B")
 					tdcli_function({
 						ID = "SearchContacts",
 						query_ = nil,
@@ -518,7 +519,7 @@ function tdcli_update_callback(data)
 					local text = [[ 💱⛓🔹 ربات  رجا🔹⛓💱 <code>BOT-ID</code> 
 					
 <i>✍  وضعیت و امار 🖥</i>⚡️]] .. tostring(fname) .. [[⚡️
-					
+<b>]] .. tostring(sima) .. [[</b>
 👤 چت های شخصی  :  
 🆗➡️🚥  <b>]] .. tostring(usrs) .. [[</b><code> user </code>
 🎎 گروههای معمولی : 
@@ -530,8 +531,7 @@ function tdcli_update_callback(data)
 ⛓💾 لینک های ذخیره شده : 
 🆗➡️🚥  <b>]] .. tostring(links)..[[</b><code> links </code>
  🔧 ویرایش ⚙
-🆔Ⓜ️ @atash2012
-os.date(" %A, %X")]]
+🆔Ⓜ️ @atash2012]]
 					return send(msg.chat_id_, 0, text)
 				elseif (text:match("^(ارسال به) (.*)$") and msg.reply_to_message_id_ ~= 0) then
 					local matches = text:match("^ارسال به (.*)$")
