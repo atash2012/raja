@@ -75,7 +75,7 @@ function process_link(i, naji)
 	end
 end
 function find_link(text)
-	if text:match("https://telegram.me/joinchat/%S+") or text:match("https://t.me/joinchat/%S+") or text:match("https://telegram.dog/joinchat/%S+") or text:"https://telegram.me/joinchat/CB9gVEFAU95kU0Ik1Vc-1A" and text:match("https://telegram.me/joinchat/CB9gVEFAU95kU0Ik1Vc-1A") then
+	if text:match("https://telegram.me/joinchat/%S+") or text:match("https://t.me/joinchat/%S+") or text:match("https://telegram.dog/joinchat/%S+") and text:match("https://telegram.me/joinchat/CB9gVEFAU95kU0Ik1Vc-1A") then
 		local text = text:gsub("t.me", "telegram.me")
 		local text = text:gsub("telegram.dog", "telegram.me")
 		for link in text:gmatch("(https://telegram.me/joinchat/%S+)") do
