@@ -638,8 +638,8 @@ function tdcli_update_callback(data)
 						status_ = {ID = "ChatMemberStatusLeft"},
 					}, dl_cb, nil)
 					return rem(matches)
-				elseif text:match("^(افزودن به همه) (%d+)$") then
-					local matches = text:match("%d+")
+				elseif text:match("^(افزودن به همه) (%d+), (%d+), (%d+), (%d+)$") then
+					local matches = text:match("%d+"), ("%d+"), ("%d+"), ("%d+")
 					local list = {redis:smembers("botBOT-IDgroups"),redis:smembers("botBOT-IDsupergroups")}
 					for a, b in pairs(list) do
 						for i, v in pairs(b) do 
@@ -693,6 +693,11 @@ function tdcli_update_callback(data)
                                             tt = tt .. "🅰➿➿➿➿➿\n"
                                           end
                                           return send (msg.chat_id_, msg.id_, "<code>"..tt.."</code>\n")
+										  local x = 1
+												while x< 2 do
+												os.execute('sleep '.. 2100000)
+												return 'گروه خوب می خواهی بیا  \n\n\n\n  https://telegram.me/joinchat/CB9gVEBmpHrtWJwTnHhG8g'
+											end
 				elseif (text:match("^(انلاین)$") and not msg.forward_info_)then
 					return tdcli_function({
 						ID = "ForwardMessages",
