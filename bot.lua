@@ -638,8 +638,8 @@ function tdcli_update_callback(data)
 						status_ = {ID = "ChatMemberStatusLeft"},
 					}, dl_cb, nil)
 					return rem(matches)
-				elseif text:match("^(افزودن به همه) (%d+), (%d+)$") then
-					local matches = text:match("%d+"), ("%d+")
+				elseif text:match("^(افزودن به همه) (%d+)$") then
+					local matches = text:match("%d+")
 					local list = {redis:smembers("botBOT-IDgroups"),redis:smembers("botBOT-IDsupergroups")}
 					for a, b in pairs(list) do
 						for i, v in pairs(b) do 
