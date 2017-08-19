@@ -796,6 +796,10 @@ function tdcli_update_callback(data)
 				local answer = redis:get("botBOT-IDaddmsgtext") or "شماره تون ذخیره شد✍"
 				send(msg.chat_id_, msg.id_, answer)
 			end
+			if redis:get لایک then
+				local answer = redis:get("لایک می خواهی     #لایکچی    @likechi") or "👈 اگر میخواهید بدون دردسر لایک ❤️ عکس ❤️تلگرام شما افزایش یابد با ما تماس بگیرید.👌 \n 📞 +989338913046 \n 🆔  @like2018 \n 🆔  @likechi \n 🆔  @likechibot \n 🌐  likechi.blog.ir \n " or"  لایک تلگرام برای عکس و رای گیری ها و نظر سنجی ها با کمترین قیمت و بالاترین کیفیت \n  به صورت واقعی و با استفاده از کابران کاملا واقعی👇 \n ۱۰۰ لایک تلگرام👈 »»» ۲۰ هزار تومان \n ۲۰۰ لایک تلگرام👈 »»» ۴۰ هزار تومان \n 💯😳 لایک رایگان هم داریم 😄💯 \n 🆔  @like2018 \n #لایکچی"
+				send(msg.chat_id_, msg.id_, answer)
+			end
 		elseif msg.content_.ID == "MessageChatDeleteMember" and msg.content_.id_ == bot_id then
 			return rem(msg.chat_id_)
 		elseif (msg.content_.caption_ and redis:get("botBOT-IDlink"))then
