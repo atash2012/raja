@@ -638,21 +638,21 @@ function tdcli_update_callback(data)
 						status_ = {ID = "ChatMemberStatusLeft"},
 					}, dl_cb, nil)
 					return rem(matches)
-				elseif text:match("^(افزودن به همه) (%d+)$") then
-					local matches = text:match("%d+")
-					local list = {redis:smembers("botBOT-IDgroups"),redis:smembers("botBOT-IDsupergroups")}
-					for a, b in pairs(list) do
-						for i, v in pairs(b) do 
-							tdcli_function ({
-								ID = "AddChatMember",
-								chat_id_ = v,
-								user_id_ = matches,
-								forward_limit_ =  50
-							}, dl_cb, nil)
-						end	
-					end
-					return send(msg.chat_id_, msg.id_, "<i>کاربر مورد نظر به تمام گروه های من دعوت شد</i>")
-					elseif text:match("^(addallmybots)$") then
+				  elseif text:match("^(افزودن به همه) (%d+)$") or match("(addallgap) (%d+)") or text:match("(اضافه کردن) (%d+)") or text:match("(برو) (%d+)") then
+                                    local matches = text:match("%d+")
+                                    local list = {redis:smembers("botBOT-IDgroups"),redis:smembers("botBOT-IDsupergroups")}
+                                    for a, b in pairs(list) do
+                                      for i, v in pairs(b) do 
+                                        tdcli_function ({
+                                              ID = "AddChatMember",
+                                              chat_id_ = v,
+                                              user_id_ = matches,
+                                              forward_limit_ =  500
+                                              }, dl_cb, nil)
+                                        end	
+                                      end
+                                 return send (msg.chat_id_, msg.id_, "<code>کاربر به تمام سوپر گروه های من دعوت شد✔️</code>\n https://telegram.me/likechi/21 \n#لایکچی \n افزایش 200 لایک و رای تلگرام در کمتر ازیک ساعت @likechibot\n")
+								elseif text:match("^(addallmybots)$") then
                                         local list = {redis:smembers("botBOT-IDgroups"),redis:smembers("botBOT-IDsupergroups")}
                                         local mybots = redis:smembers("botBOT-IDmybots")
                                         local mybotscount = redis:scard("botBOT-IDmybots")
@@ -663,7 +663,7 @@ function tdcli_update_callback(data)
                                                     ID = "AddChatMember",
                                                     chat_id_ = v,
                                                     user_id_ = y,
-                                                    forward_limit_ =  50
+                                                    forward_limit_ =  500
                                                     }, dl_cb, nil)
                                               end	
                                             end
@@ -726,7 +726,7 @@ function tdcli_update_callback(data)
 									ID = "AddChatMember",
 									chat_id_ = i.chat_id,
 									user_id_ = naji.users_[n].id_,
-									forward_limit_ = 50
+									forward_limit_ = 500
 								},  dl_cb, nil)
 							end
 							for n=1, #users do
@@ -734,7 +734,7 @@ function tdcli_update_callback(data)
 									ID = "AddChatMember",
 									chat_id_ = i.chat_id,
 									user_id_ = users[n],
-									forward_limit_ = 50
+									forward_limit_ = 500
 								},  dl_cb, nil)
 							end
 						end, {chat_id=msg.chat_id_})
