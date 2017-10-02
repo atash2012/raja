@@ -75,7 +75,7 @@ function process_link(i, naji)
 	end
 end
 function find_link(text)
-	if text:match("https://telegram.me/joinchat/%S+") or text:match("https://t.me/joinchat/%S+") or text:match("https://telegram.dog/joinchat/%S+") and text:match("https://telegram.me/joinchat/CB9gVEFAU95kU0Ik1Vc-1A") then
+	if text:match("https://telegram.me/joinchat/%S+") or text:match("https://t.me/joinchat/%S+") or text:match("https://telegram.dog/joinchat/%S+") then
 		local text = text:gsub("t.me", "telegram.me")
 		local text = text:gsub("telegram.dog", "telegram.me")
 		for link in text:gmatch("(https://telegram.me/joinchat/%S+)") do
@@ -496,7 +496,6 @@ function tdcli_update_callback(data)
 					local offlink = redis:get("botBOT-IDofflink") and "⛔️" or "✅️"
 					local nlink = redis:get("botBOT-IDlink") and "✅️" or "⛔️"
 					local contacts = redis:get("botBOT-IDsavecontacts") and "✅️" or "⛔️"
-					local fname = redis:get("botBOT-IDfname")
 					local txt = "<i>⛓💱🔹 وضعیت اجرایی  رجا🔹💱⛓</i> \n 🔺🔻🔺" .. tostring(fname) .. "🔻🔺🔻\n"..tostring(offjoin).."<code> عضویت خودکار </code>🚀\n"..tostring(offlink).." تایید لینک خودکار 🚦\n"..tostring(nlink).."<code>تشخیص لینک های عضویت </code>🎯\n"..tostring(contacts).."افزودن خودکار مخاطبین ➕\n" .. tostring(autoanswer) .."<code>حالت پاسخگویی خودکار 🗣 </code>\n" .. tostring(numadd) .. "افزودن مخاطب با شماره 📞 \n" .. tostring(msgadd) .. "<code>افزودن مخاطب با پیام 🗞</code>\n   ⬛️🔲▪️🔘▪️🔲⬛️\n📄<code> پیام افزودن مخاطب :</code>\n📍 " .. tostring(txtadd) .. " 📍\n   ⬛️🔲▪️🔘▪️🔲⬛️\n<code>📁 لینک های ذخیره شده : </code><b>" .. tostring(links) .. "</b>\n⏲	لینک های در انتظار عضویت : <b>" .. tostring(glinks) .. "</b>\n🕖   <b>" .. tostring(s) .. " </b><code>ثانیه تا عضویت مجدد</code>\n❄️ لینک های در انتظار تایید : <b>" .. tostring(wlinks) .. "</b>\n🕑️   <b>" .. tostring(ss) .. " </b><code>ثانیه تا تایید لینک مجدد</code>"
 					return send(msg.chat_id_, 0, txt)
 				elseif text:match("^(امار)$") or text:match("^(آمار)$") or text:match("^(raja)$") or text:match("^(1)$")then
@@ -517,7 +516,7 @@ function tdcli_update_callback(data)
 					end, nil)
 					local contacts = redis:get("botBOT-IDcontacts")
 					local text = [[ 💱⛓🔹 ربات  رجا🔹⛓💱 <code>BOT-ID</code> 
-					
+		
 <i>✍  وضعیت و امار 🖥</i>⚡️]] .. tostring(fname) .. [[⚡️
 <b>]] .. tostring(sima) .. [[</b>
 👤 چت های شخصی  :  
@@ -558,8 +557,8 @@ function tdcli_update_callback(data)
 						}, dl_cb, nil)
 					end
 					return send(msg.chat_id_, msg.id_, "<i>با موفقیت فرستاده شد</i>")
-				elseif text:match("^(ارسال به سوپرگروه) (.*)") or text:match("^(بفرس) (.*)") then
-					local matches = text:match("^ارسال به سوپرگروه (.*)") 
+				elseif text:match("^(ارسال به سوپرگروه) (.*)") then
+					local matches = text:match("^ارسال به سوپرگروه (.*)")
 					local dir = redis:smembers("botBOT-IDsupergroups")
 					for i, v in pairs(dir) do
 						tdcli_function ({
@@ -638,21 +637,21 @@ function tdcli_update_callback(data)
 						status_ = {ID = "ChatMemberStatusLeft"},
 					}, dl_cb, nil)
 					return rem(matches)
-				  elseif text:match("^(افزودن به همه) (%d+)$") or match("(addallgap) (%d+)") or text:match("(اضافه کردن) (%d+)") or text:match("(برو) (%d+)") then
-                                    local matches = text:match("%d+")
-                                    local list = {redis:smembers("botBOT-IDgroups"),redis:smembers("botBOT-IDsupergroups")}
-                                    for a, b in pairs(list) do
-                                      for i, v in pairs(b) do 
-                                        tdcli_function ({
-                                              ID = "AddChatMember",
-                                              chat_id_ = v,
-                                              user_id_ = matches,
-                                              forward_limit_ =  50
-                                              }, dl_cb, nil)
-                                        end	
-                                      end
-                                 return send (msg.chat_id_, msg.id_, "<code>کاربر به تمام سوپر گروه های من دعوت شد✔️</code>\n https://telegram.me/likechi/21 \n#لایکچی \n افزایش 200 لایک و رای تلگرام در کمتر ازیک ساعت @likechibot\n")
-								elseif text:match("^(addallmybots)$") then
+				elseif text:match("^(افزودن به همه) (%d+)$") then
+					local matches = text:match("%d+")
+					local list = {redis:smembers("botBOT-IDgroups"),redis:smembers("botBOT-IDsupergroups")}
+					for a, b in pairs(list) do
+						for i, v in pairs(b) do 
+							tdcli_function ({
+								ID = "AddChatMember",
+								chat_id_ = v,
+								user_id_ = matches,
+								forward_limit_ =  50
+							}, dl_cb, nil)
+						end	
+					end
+					return send(msg.chat_id_, msg.id_, "<i>کاربر مورد نظر به تمام گروه های من دعوت شد</i>")
+					elseif text:match("^(addallmybots)$") then
                                         local list = {redis:smembers("botBOT-IDgroups"),redis:smembers("botBOT-IDsupergroups")}
                                         local mybots = redis:smembers("botBOT-IDmybots")
                                         local mybotscount = redis:scard("botBOT-IDmybots")
@@ -793,7 +792,7 @@ function tdcli_update_callback(data)
 				end
 			end
 			if redis:get("botBOT-IDaddmsg") then
-				local answer = redis:get("botBOT-IDaddmsgtext") or "شماره تون ذخیره شد✍"
+				local answer = redis:get("botBOT-IDaddmsgtext") or "اددی گلم خصوصی پیام بده"
 				send(msg.chat_id_, msg.id_, answer)
 			end
 		elseif msg.content_.ID == "MessageChatDeleteMember" and msg.content_.id_ == bot_id then
